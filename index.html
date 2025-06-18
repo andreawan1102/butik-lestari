@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Butik Desain - Custom Busana & Kebaya Eksklusif</title>
+    <link rel="stylesheet" href="syle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo"><a href="index.html">Butik Lestari</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="#katalog">Katalog</a></li>
+                    <li><a href="#layanan">Layanan</a></li>
+                    <li><a href="#tentang">Tentang Kami</a></li>
+                    <li><a href="#kontak">Kontak</a></li>
+                    <li><a href="#" id="login-btn" class="btn btn-primary">Login</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Wujudkan Gaya Impian Anda</h2>
+                    <p>Desain busana dan kebaya eksklusif untuk momen istimewa Anda.</p>
+                    <a href="#katalog" class="btn btn-primary">Lihat Koleksi</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="katalog" class="section-padding">
+            <div class="container">
+                <h2>Koleksi Terbaru</h2>
+                <div class="katalog-grid" id="katalog-container">
+                    </div>
+            </div>
+        </section>
+
+        <section id="layanan" class="section-padding">
+            <div class="container">
+                <h2>Layanan Kami</h2>
+                <div class="layanan-grid">
+                    <div class="layanan-item">
+                        <i class="fas fa-cut"></i>
+                        <h3>Desain Custom</h3>
+                        <p>Wujudkan busana impian Anda dengan desain yang sepenuhnya disesuaikan.</p>
+                    </div>
+                    <div class="layanan-item">
+                        <i class="fas fa-palette"></i>
+                        <h3>Konsultasi Gaya</h3>
+                        <p>Dapatkan saran dari desainer profesional untuk menemukan gaya terbaik Anda.</p>
+                    </div>
+                    <div class="layanan-item">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <h3>Jahitan Berkualitas Tinggi</h3>
+                        <p>Setiap busana dibuat dengan detail dan kualitas jahitan terbaik.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tentang" class="section-padding">
+            <div class="container">
+                <h2>Tentang Kami</h2>
+                <div class="tentang-content">
+                    <div class="tentang-image">
+                        <img src="image_1e2401.jpg" alt="Tentang Butik Lestari">
+                    </div>
+                    <div class="tentang-text">
+                        <p>Butik Lestari adalah destinasi utama Anda untuk busana dan kebaya eksklusif yang dirancang khusus. Dengan pengalaman bertahun-tahun, kami berdedikasi untuk menciptakan pakaian yang tidak hanya indah tetapi juga mencerminkan kepribadian unik setiap pelanggan.</p>
+                        <p>Kami percaya bahwa setiap individu layak tampil memukau di momen-momen spesial mereka. Oleh karena itu, kami menggabungkan tradisi dengan sentuhan modern, menggunakan bahan berkualitas tinggi dan keahlian tangan terbaik untuk menghasilkan karya seni yang bisa Anda kenakan.</p>
+                        <p>Dari kebaya pengantin hingga gaun pesta, setiap jahitan di Butik Lestari adalah perwujudan dari passion dan dedikasi kami terhadap fashion dan kepuasan pelanggan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kontak" class="section-padding">
+            <div class="container">
+                <h2>Hubungi Kami</h2>
+                <p class="text-center">Jangan ragu untuk menghubungi kami untuk pertanyaan atau pemesanan.</p>
+                <div class="kontak-info">
+                    <div class="kontak-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Alamat</h3>
+                        <p>Jl. Tegal Sari 03 NO.54, Kel. Sukasari, Kec. Tangerang, Kota Tangerang, Prov. Banten</p>
+                    </div>
+                    <div class="kontak-item">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>info@butikdesain.com</p>
+                    </div>
+                    <div class="kontak-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <h3>Telepon</h3>
+                        <p>+62 813-1610-9823</p>
+                    </div>
+                    <div class="kontak-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <h3>WhatsApp</h3>
+                        <p>+62 813-1610-9823</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Masuk</button>
+                <p class="register-link">Belum punya akun? <a href="#">Daftar sekarang</a></p>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Butik Desain. Semua Hak Cipta Dilindungi.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

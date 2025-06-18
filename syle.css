@@ -1,0 +1,835 @@
+/* General Styling */
+:root {
+    --primary-color: #9C27B0; /* Ungu Terong - Lebih Vibrant */
+    --secondary-color: #FFC107; /* Kuning Emas - Kontras & Cerah */
+    --accent-color: #673AB7; /* Ungu Gelap - Untuk detail */
+    --text-color: #333;
+    --light-text-color: #8a21ae;
+    --white-color: #fff;
+    --bg-light: #f4f4f9; /* Latar belakang lebih terang */
+    --font-family: 'Poppins', sans-serif; /* Font modern */
+    --heading-font-family: 'Playfair Display', serif; /* Font judul tetap elegan */
+}
+
+/* Import Google Fonts (Sudah dipindahkan ke HTML, jadi bisa dihapus dari sini jika sudah di HTML) */
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap'); */
+
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white-color);
+    overflow-x: hidden; /* Mencegah scroll horizontal yang tidak diinginkan */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background-color: var(--white-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    margin: 0;
+    font-family: var(--heading-font-family);
+    font-size: 2rem;
+}
+
+.logo a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+/* ================================================================= */
+/* === PENTING: PERUBAHAN UNTUK EFEK HOVER KOTAK "DRAWING BORDER" === */
+/* ================================================================= */
+
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    position: relative;
+    overflow: hidden; /* Penting untuk menyembunyikan bagian border yang belum digambar */
+    display: inline-block;
+    z-index: 1; /* Pastikan teks di atas border */
+    transition: color 0.3s ease; /* Transisi untuk warna teks */
+}
+
+/* Pseudo-elemen untuk garis HORIZONTAL (atas dan bawah) */
+nav ul li a::before {
+    content: '';
+    position: absolute;
+    height: 2px; /* Ketebalan garis horizontal */
+    width: 0%; /* Awalnya lebar 0 */
+    background-color: var(--secondary-color); /* Warna garis */
+    transition: width 0.3s ease-out; /* Animasi lebar */
+    z-index: -1; /* Di belakang teks */
+}
+
+/* Garis atas */
+nav ul li a::before {
+    top: 0;
+    left: 50%; /* Mulai dari tengah */
+    transform: translateX(-50%); /* Pusatkan */
+}
+
+/* Pseudo-elemen untuk garis VERTIKAL (kiri dan kanan) */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 2px; /* Ketebalan garis vertikal */
+    height: 0%; /* Awalnya tinggi 0 */
+    background-color: var(--secondary-color); /* Warna garis */
+    transition: height 0.3s ease-out; /* Animasi tinggi */
+    z-index: -1; /* Di belakang teks */
+}
+
+/* Garis kiri */
+nav ul li a::after {
+    top: 50%; /* Mulai dari tengah */
+    left: 0;
+    transform: translateY(-50%); /* Pusatkan */
+}
+
+/* Garis kanan (kita perlu trik tambahan atau elemen terpisah jika ingin animasi dari atas ke bawah) */
+/* Untuk efek yang lebih presisi seperti digambar, kita akan menggunakan 4 elemen terpisah atau lebih kompleks */
+/* Alternatif: menggunakan properti border pada ::before dan ::after dan memanipulasi clip-path atau border-image */
+
+/* REVISI EFEK HOVER UNTUK MENGGAMBAR KOTAK DENGAN 4 SISI TERPISAH (menggunakan trik) */
+/* Ini akan membutuhkan sedikit lebih banyak CSS, tapi hasilnya lebih dekat ke "drawing" */
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+/* Garis Atas (Top) */
+nav ul li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%; /* Mulai dari tengah atas */
+    width: 0;
+    height: 2px; /* Ketebalan garis */
+    background: var(--secondary-color);
+    transition: width 0.3s ease-out;
+    transform: translateX(-50%); /* Pusatkan horizontal */
+    z-index: -1;
+}
+
+/* Garis Bawah (Bottom) */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%; /* Mulai dari tengah bawah */
+    width: 0;
+    height: 2px; /* Ketebalan garis */
+    background: var(--secondary-color);
+    transition: width 0.3s ease-out;
+    transform: translateX(-50%); /* Pusatkan horizontal */
+    z-index: -1;
+}
+
+/* Garis Kiri (Left) - Akan kita gambar terpisah */
+/* Menggunakan pseudo-elemen lain jika memungkinkan, atau kombinasi background-image */
+/* Karena hanya ada ::before dan ::after, kita harus kreatif */
+
+/* Pendekatan yang lebih baik untuk drawing border: Menggunakan 2 pseudo-elemen */
+/* dan mengontrol 4 sisi dengan `border` dan `transform` */
+
+/* Versi paling akurat untuk "drawing" border kotak dengan 2 pseudo-elemen: */
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    position: relative;
+    overflow: hidden; /* Penting untuk menyembunyikan bagian yang belum di-draw */
+    display: inline-block;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+/* Pseudo-elemen untuk garis horizontal (atas dan bawah) */
+nav ul li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    border-top: 2px solid var(--secondary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    transition: width 0.3s ease-out; /* Animasi lebar */
+    z-index: -1;
+    box-sizing: border-box; /* Agar padding tidak mempengaruhi lebar */
+}
+
+/* Pseudo-elemen untuk garis vertikal (kiri dan kanan) */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0%;
+    width: 100%;
+    border-left: 2px solid var(--secondary-color);
+    border-right: 2px solid var(--secondary-color);
+    transition: height 0.3s ease-out; /* Animasi tinggi */
+    z-index: -1;
+    box-sizing: border-box; /* Agar padding tidak mempengaruhi tinggi */
+}
+
+nav ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* Animasi saat hover */
+nav ul li a:hover::before {
+    width: 100%; /* Garis horizontal memanjang penuh */
+}
+
+nav ul li a:hover::after {
+    height: 100%; /* Garis vertikal memanjang penuh */
+}
+
+/* Jika Anda ingin efek "menggambar" yang lebih berurutan (misal: atas, kanan, bawah, kiri),
+   itu akan jauh lebih kompleks dan mungkin memerlukan JavaScript atau
+   animasi CSS keyframe yang sangat spesifik untuk setiap garis,
+   atau menggunakan properti clip-path yang dianimasikan.
+   Pendekatan di atas akan membuat garis horizontal dan vertikal muncul secara bersamaan.
+
+   Jika Anda ingin efek yang persis seperti yang digambarkan (garis melingkar
+   sampai membentuk kotak), itu biasanya dicapai dengan SVG animation (stroke-dasharray, stroke-dashoffset)
+   atau dengan properti `linear-gradient` yang rumit dan dianimasikan.
+   Untuk CSS murni, yang paling mendekati adalah efek drawing dari 2 sisi (horizontal/vertikal)
+   atau 4 sisi secara terpisah.
+
+   Saya akan mencoba satu pendekatan lagi yang paling mendekati "drawing" dengan CSS murni
+   tanpa SVG atau JS yang rumit, yaitu dengan menganimasikan border secara individual,
+   tapi itu berarti perlu elemen ekstra atau cara yang sangat pintar dengan pseudo-elemen.
+
+   Coba versi ini dulu, karena ini adalah cara yang paling umum untuk efek "border drawing"
+   dengan hanya ::before dan ::after: */
+
+/* ===== Pilihan 2: Animasi Border dari sudut (misal, kiri atas ke kanan bawah) ===== */
+/* Ini mungkin yang paling mendekati "melingkar" tanpa terlalu kompleks */
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+/* Pseudo-elemen untuk garis atas dan kanan */
+nav ul li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0; /* Mulai dari kanan atas */
+    width: 0; /* Awalnya 0 */
+    height: 0; /* Awalnya 0 */
+    border-top: 2px solid var(--secondary-color);
+    border-right: 2px solid var(--secondary-color);
+    transition: width 0.3s ease-out, height 0.3s ease-out 0.3s; /* Animasi lebar, lalu tinggi */
+    z-index: -1;
+    box-sizing: border-box;
+}
+
+/* Pseudo-elemen untuk garis bawah dan kiri */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%; /* Mulai dari kiri bawah */
+    width: 0; /* Awalnya 0 */
+    height: 0; /* Awalnya 0 */
+    border-bottom: 2px solid var(--secondary-color);
+    border-left: 2px solid var(--secondary-color);
+    transition: width 0.3s ease-out 0.3s, height 0.3s ease-out; /* Animasi tinggi, lalu lebar */
+    z-index: -1;
+    box-sizing: border-box;
+}
+
+nav ul li a:hover {
+    color: var(--primary-color);
+}
+
+nav ul li a:hover::before {
+    width: 100%; /* Atas ke kanan */
+    height: 100%; /* Kanan ke bawah */
+}
+
+nav ul li a:hover::after {
+    width: 100%; /* Bawah ke kiri */
+    height: 100%; /* Kiri ke atas */
+}
+
+/* ================================================================= */
+/* === AKHIR PERUBAHAN UNTUK EFEK HOVER KOTAK "DRAWING BORDER" === */
+/* ================================================================= */
+
+
+/* Hero Section */
+#hero {
+    background: linear-gradient(rgb(155, 4, 157), rgba(0,0,0,0.5)), url('image_1daec6.jpg') no-repeat center center/cover;
+    color: var(--white-color);
+    text-align: center;
+    padding: 150px 0;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content h2 {
+    font-family: var(--heading-font-family);
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+
+/* Section Styling */
+.section-padding {
+    padding: 80px 0;
+    background-color: var(--bg-light);
+}
+
+.section-padding:nth-of-type(even) {
+    background-color: var(--white-color);
+}
+
+.section-padding h2 {
+    font-family: var(--heading-font-family);
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 60px;
+    color: var(--primary-color);
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-padding h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--secondary-color);
+    border-radius: 2px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Katalog Section */
+.katalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.produk-item {
+    background-color: var(--white-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.produk-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.produk-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+.produk-item h3 {
+    font-size: 1.4rem;
+    margin: 20px 15px 10px;
+    color: var(--primary-color);
+}
+
+.produk-item .harga {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.produk-item .btn-detail {
+    margin: 0 15px 20px;
+    align-self: center; /* Untuk memusatkan tombol dalam flex container */
+    width: calc(100% - 30px); /* Ambil lebar penuh dikurangi padding */
+}
+
+
+/* Layanan Section */
+.layanan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.layanan-item {
+    background-color: var(--white-color);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.layanan-item:hover {
+    transform: translateY(-5px);
+}
+
+.layanan-item i {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.layanan-item h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.layanan-item p {
+    color: var(--light-text-color);
+}
+
+/* Tentang Kami Section */
+.tentang-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.tentang-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.tentang-text p {
+    margin-bottom: 15px;
+    color: var(--light-text-color);
+}
+
+/* Kontak Section */
+.kontak-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.kontak-item {
+    background-color: var(--white-color);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    flex: 1 1 calc(25% - 30px); /* 4 kolom di desktop */
+    min-width: 250px; /* Minimal lebar item */
+    box-sizing: border-box;
+}
+
+.kontak-item i {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+.kontak-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.kontak-item p {
+    color: var(--light-text-color);
+}
+
+/* Footer */
+footer {
+    background-color: var(--accent-color);
+    color: var(--white-color);
+    padding: 30px 0;
+    text-align: center;
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-links a {
+    color: var(--white-color);
+    font-size: 1.5rem;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--secondary-color);
+}
+
+
+/* --- MODAL LOGIN STYLES --- */
+.modal {
+    display: none; /* Sembunyikan secara default */
+    position: fixed; /* Tetap di posisi yang sama meskipun digulir */
+    z-index: 1000; /* Letakkan di atas semua konten lain */
+    left: 0;
+    top: 0;
+    width: 100%; /* Lebar penuh */
+    height: 100%; /* Tinggi penuh */
+    overflow: auto; /* Aktifkan scroll jika konten terlalu besar */
+    background-color: rgba(0, 0, 0, 0.6); /* Warna latar belakang gelap transparan */
+    justify-content: center; /* Digunakan saat display flex */
+    align-items: center;   /* Digunakan saat display flex */
+}
+
+.modal.show {
+    display: flex; /* Hanya tampilkan ketika memiliki kelas 'show' yang ditambahkan JS */
+}
+
+.modal-content {
+    background-color: var(--white-color);
+    padding: 40px; /* Tambah padding agar ada ruang di dalam kotak */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    width: 90%; /* Sesuaikan lebar agar lebih proporsional */
+    max-width: 400px; /* Batasi lebar maksimal agar tidak terlalu lebar di layar besar */
+    display: flex; /* Gunakan flexbox untuk menata item di dalam modal-content */
+    flex-direction: column; /* Tata item secara vertikal */
+    align-items: center; /* Pusatkan item secara horizontal di dalam modal-content */
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--secondary-color); /* Warna kuning saat hover/focus */
+    text-decoration: none;
+}
+
+.modal-content h2 {
+    font-family: var(--heading-font-family);
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+}
+
+.modal-content form {
+    width: 100%; /* Pastikan form mengambil lebar penuh */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Pusatkan elemen form */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Spasi antar grup input */
+    width: 100%; /* Pastikan form group mengambil lebar penuh yang tersedia */
+    text-align: left; /* Biarkan label tetap sejajar kiri di dalam form-group */
+}
+
+.form-group label {
+    display: block; /* Buat label menjadi blok agar di atas input */
+    margin-bottom: 8px; /* Spasi antara label dan input */
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* Memanjangkan kotak input */
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%; /* MEMANJANGKAN KOTAK INPUT */
+    padding: 12px 15px; /* Tambah padding agar lebih tinggi dan ada ruang teks */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Sangat penting: Pastikan padding tidak menambah lebar total */
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+    border-color: var(--primary-color); /* Beri feedback visual saat fokus */
+    outline: none; /* Hapus outline default browser */
+}
+
+/* Memanjangkan tombol Masuk */
+.modal-content .btn-primary {
+    margin-top: 10px; /* Spasi dari input terakhir */
+    width: 100%; /* MEMANJANGKAN TOMBOL */
+    padding: 12px 20px; /* Tambah padding agar tombol lebih tinggi */
+    font-size: 1.1rem; /* Perbesar ukuran font tombol */
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 25px; /* Spasi antara tombol dan link register */
+    font-size: 0.95rem;
+    color: var(--light-text-color);
+}
+
+.register-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+
+/* --- BUTTON STYLES WITH HOVER ANIMATION (TANPA KOTAK) --- */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease; /* Transisi untuk semua properti yang berubah */
+    cursor: pointer;
+    white-space: nowrap; /* Mencegah teks tombol patah baris */
+}
+
+/* Primary Button (untuk Login/Masuk dan Lihat Koleksi di Hero) */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border: none; /* Hapus border untuk tampilan "tanpa kotak" */
+    position: relative; /* Penting untuk efek hover */
+    overflow: hidden; /* Penting untuk efek hover */
+    z-index: 1; /* Penting untuk efek hover */
+}
+
+/* Efek animasi hover untuk tombol .btn-primary (efek geser overlay putih) */
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background-color: rgba(255, 255, 255, 0.2); /* Sedikit overlay putih */
+    transform: translateX(-100%); /* Sembunyikan awalnya di kiri */
+    transition: transform 0.3s ease-out; /* Animasi geser */
+    z-index: -1;
+}
+
+.btn-primary:hover::before {
+    transform: translateX(0); /* Geser ke kanan saat hover */
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-color); /* Beri sedikit perubahan warna latar belakang */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Tambah shadow saat hover */
+}
+
+/* Secondary Button (untuk tombol Lihat Detail produk) */
+.btn-detail {
+    background-color: transparent; /* Latar belakang transparan */
+    color: var(--primary-color); /* Warna teks dari primary-color */
+    border: 2px solid var(--primary-color); /* Border tipis dengan warna primary-color */
+    padding: 8px 18px; /* Sedikit lebih kecil dari primary button */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Efek animasi hover untuk tombol .btn-detail (efek isi warna dari kiri) */
+.btn-detail::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color); /* Warna primary-color */
+    transform: scaleX(0); /* Sembunyikan awalnya (lebar 0) */
+    transform-origin: left; /* Mulai dari kiri */
+    transition: transform 0.3s ease-out;
+    z-index: -1;
+}
+
+.btn-detail:hover::before {
+    transform: scaleX(1); /* Lebarkan ke 100% saat hover */
+}
+
+.btn-detail:hover {
+    color: var(--white-color); /* Ubah warna teks menjadi putih saat hover */
+    border-color: transparent; /* Hilangkan border saat hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Responsive Design (Mobile First) */
+@media (max-width: 768px) {
+    header .container {
+        flex-wrap: wrap;
+    }
+
+    nav {
+        display: none;
+        width: 100%;
+        margin-top: 15px;
+        flex-direction: column;
+        background-color: var(--white-color);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border-radius: 5px;
+        padding: 10px 0;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 10px 0;
+        color: var(--text-color); /* Warna teks untuk menu mobile */
+    }
+
+    nav ul li a:hover {
+        background-color: var(--bg-light);
+    }
+
+    .menu-toggle {
+        display: block; /* Tampilkan menu toggle pada mobile */
+    }
+
+    #hero {
+        padding: 120px 0;
+        min-height: 60vh;
+    }
+
+    .hero-content h2 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .section-padding {
+        padding: 50px 0;
+    }
+
+    .section-padding h2 {
+        font-size: 2rem;
+    }
+
+    .katalog-grid,
+    #layanan .layanan-grid,
+    .tentang-content,
+    #kontak .kontak-info {
+        grid-template-columns: 1fr; /* Kolom tunggal untuk mobile */
+    }
+
+    .kontak-item {
+        flex-basis: auto; /* Izinkan elemen mengambil lebar sesuai kebutuhan */
+    }
+
+    .modal-content {
+        width: 95%; /* Sedikit lebih lebar untuk layar yang sangat kecil */
+        padding: 20px;
+    }
+
+    .produk-item .btn-detail {
+        width: calc(100% - 30px); /* Adjust for smaller screens */
+    }
+}
